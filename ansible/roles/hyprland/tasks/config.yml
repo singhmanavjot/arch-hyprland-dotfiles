@@ -29,3 +29,14 @@
     - { src: .config/hypr, dest: "{{ home }}/.config", mode: '0755' }
     - { src: .config/swaylock, dest: "{{ home }}/.config", mode: '0755' }
     - { src: .config/dunst, dest: "{{ home }}/.config", mode: '0755' }
+
+- name: Configure greetd config.
+  ansible.builtin.blockinfile:
+    path: /etc/greetd/config.toml
+    block: |
+      [initial_session]
+      command = "Hyprland"
+      user = "manav"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK greetd"
+    insertafter: EOF
+    state: present
