@@ -1,0 +1,20 @@
+---
+- name: Ensure user account for the aur builder is present
+  ansible.builtin.user:
+    name: aur_builder
+    shell: /usr/bin/nologin
+    password_lock: true
+
+- name: Ensure sudoers file for aur builder is present
+  ansible.builtin.copy:
+    src: aur_builder
+    dest: /etc/sudoers.d/aur_builder
+    owner: root
+    group: root
+    mode: 0440
+
+- name: Ensure aur helper is installed
+  kewlfft.aur.aur:
+    name: yay
+    state: present
+  become_user: aur_builder

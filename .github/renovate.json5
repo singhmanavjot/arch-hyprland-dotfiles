@@ -1,0 +1,37 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    "docker:enableMajor",
+    ":disableRateLimiting",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":enablePreCommit",
+    ":automergeDigest",
+    ":automergeBranch",
+    "github>singhmanavjot/arch-hyprland-dotfiles//.github/renovate/commitMessage.json5",
+    "github>singhmanavjot/arch-hyprland-dotfiles//.github/renovate/labels.json5",
+    "github>singhmanavjot/arch-hyprland-dotfiles//.github/renovate/semanticCommits.json5",
+    "helpers:pinGitHubActionDigests"
+  ],
+  "dependencyDashboard": true,
+  "dependencyDashboardTitle": "Renovate Dashboard 🤖",
+  "suppressNotifications": ["prIgnoreNotification"],
+  "rebaseWhen": "conflicted",
+  "schedule": ["every saturday"],
+  "pre-commit": {
+    "enabled": true
+  },
+  "regexManagers": [
+    {
+      "description": "Process various other dependencies",
+      "fileMatch": [
+        "ansible/.+\\.ya?ml$"
+      ],
+      "matchStrings": [
+        "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( registryUrl=(?<registryUrl>\\S+))?\n.*?\"(?<currentValue>.*)\"\n"
+      ],
+      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+---
+- name: Ensure timeshift is installed
+  kewlfft.aur.aur:
+    name:
+      - timeshift
+      - timeshift-autosnap
+    state: present
+  become_user: aur_builder

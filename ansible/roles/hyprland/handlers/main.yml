@@ -1,0 +1,4 @@
+---
+- name: Update xdg-user-dirs
+  ansible.builtin.command: /usr/bin/xdg-user-dirs-update
+  become_user: "{{ user }}"

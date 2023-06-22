@@ -1,0 +1,98 @@
+---
+- name: Ensure essential system packages are present
+  community.general.pacman:
+    name:
+      - pipewire
+      - pipewire-alsa
+      - pipewire-pulse
+      - pipewire-jack
+      - pipewire-audio
+      - gst-plugin-pipewire
+      - wireplumber
+      - pavucontrol
+      - polkit-kde-agent
+      - xdg-desktop-portal-hyprland
+      - qt5-wayland
+      - qt6-wayland
+      - libva
+      - bluez
+      - bluez-utils
+      - power-profiles-daemon
+    state: present
+
+- name: Ensure hyprland packages are present
+  community.general.pacman:
+    name:
+      - dunst
+      - cliphist
+      - udiskie
+      - grim
+      - slurp
+      - swappy
+      - swayidle
+      - network-manager-applet
+      - blueman
+      - kitty
+      - xdg-user-dirs
+      - kvantum
+      - qt5ct
+    state: present
+
+- name: Ensure hyprland packages from aur are present
+  kewlfft.aur.aur:
+    name:
+      - hyprland-nvidia
+      - waybar-hyprland-git
+      - swww
+      - rofi-lbonn-wayland
+      - swaylock-effects
+      - nwg-look
+      - catppuccin-gtk-theme-mocha
+      - tela-circle-icon-theme-dracula
+      - bibata-cursor-theme
+      - libva-nvidia-driver-git
+    state: present
+  become_user: aur_builder
+
+- name: Ensure desktop apps are present
+  community.general.pacman:
+    name:
+      - firefox
+      - thunar
+      - thunar-archive-plugin
+    state: present
+
+- name: Ensure desktop apps from aur are present
+  kewlfft.aur.aur:
+    name:
+      - visual-studio-code-bin
+    state: present
+  become_user: aur_builder
+
+- name: Ensure shell packages are present
+  community.general.pacman:
+    name:
+      - zsh
+      - zsh-syntax-highlighting
+      - zsh-autosuggestions
+      - starship
+      - git
+    state: present
+
+- name: Ensure shell packages from aur are present
+  kewlfft.aur.aur:
+    name:
+      - oh-my-zsh-git
+      - nerd-fonts-meta
+    state: present
+  become_user: aur_builder
+
+
+- name: Ensure services are enabled and started
+  ansible.builtin.service:
+    name: "{{ item }}"
+    enabled: true
+    state: started
+  loop:
+    - bluetooth
+    - power-profiles-daemon

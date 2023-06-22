@@ -1,0 +1,22 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "packageRules": [
+    {
+      "matchDatasources": ["galaxy", "galaxy-collection"],
+      "matchUpdateTypes": ["major"],
+      "commitMessagePrefix": "feat(ansible)!: "
+    },
+    {
+      "matchDatasources": ["galaxy", "galaxy-collection"],
+      "matchUpdateTypes": ["minor"],
+      "semanticCommitType": "feat",
+      "semanticCommitScope": "ansible"
+    },
+    {
+      "matchDatasources": ["galaxy", "galaxy-collection"],
+      "matchUpdateTypes": ["patch"],
+      "semanticCommitType": "fix",
+      "semanticCommitScope": "ansible"
+    }
+  ]
+}

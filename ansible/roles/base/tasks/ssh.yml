@@ -1,0 +1,26 @@
+---
+- name: Ensure ssh package is installed
+  community.general.pacman:
+    name: openssh
+    state: present
+
+- name: Ensure ssh is started and enabled
+  ansible.builtin.service:
+    name: sshd
+    state: started
+    enabled: true
+
+- name: Ensure config directories for ssh is present
+  ansible.builtin.file:
+    path: "{{ home }}/.ssh"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0700
+
+- name: Ensure ssh key pair is present for the user
+  ansible.builtin.user:
+    name: "{{ user }}"
+    generate_ssh_key: true
+    ssh_key_file: "{{ home }}/.ssh/{{ user }}"
+    ssh_key_type: ed25519

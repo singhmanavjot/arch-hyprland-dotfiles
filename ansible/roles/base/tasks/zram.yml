@@ -1,0 +1,12 @@
+---
+- name: Ensure zram is installed
+  kewlfft.aur.aur:
+    name: zramd
+    state: present
+  become_user: aur_builder
+
+- name: Ensure zramd is enabled
+  ansible.builtin.service:
+    name: zramd.service
+    enabled: true
+    state: started

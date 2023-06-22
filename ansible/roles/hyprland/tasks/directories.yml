@@ -1,0 +1,41 @@
+---
+- name: Remove default home directory folders.
+  ansible.builtin.file:
+    path: "{{ home }}/{{ item }}"
+    state: absent
+  loop:
+    - Desktop
+    - Documents
+    - Downloads
+    - Music
+    - Pictures
+    - Public
+    - Templates
+    - Videos
+
+- name: Create or update personal home diretory folders.
+  ansible.builtin.file:
+    path: "{{ home }}/{{ item }}"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: 0755
+  loop:
+    - desktop
+    - documents
+    - downloads
+    - music
+    - pictures
+    - public
+    - templates
+    - videos
+    - workspace
+
+- name: Copy dotfiles to destination
+  ansible.builtin.copy:
+    src: .config/user-dirs.dirs
+    dest: "{{ home }}/.config/user-dirs.dirs"
+    mode: 0700
+    owner: "{{ user }}"
+    group: "{{ user }}"
+  notify: Update xdg-user-dirs

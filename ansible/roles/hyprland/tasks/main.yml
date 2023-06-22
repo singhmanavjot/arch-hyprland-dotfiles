@@ -1,0 +1,9 @@
+---
+- name: Include packages tasks
+  ansible.builtin.include_tasks: packages.yml
+
+- name: Include config tasks
+  ansible.builtin.include_tasks: config.yml
+
+- name: Include directories tasks
+  ansible.builtin.include_tasks: directories.yml

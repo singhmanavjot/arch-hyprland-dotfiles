@@ -1,0 +1,15 @@
+---
+- name: Include aur tasks
+  ansible.builtin.include_tasks: aur.yml
+
+- name: Include pacman tasks
+  ansible.builtin.include_tasks: pacman.yml
+
+- name: Include ssh tasks
+  ansible.builtin.include_tasks: ssh.yml
+
+- name: Include zram tasks
+  ansible.builtin.include_tasks: zram.yml
+
+- name: Include timeshift tasks
+  ansible.builtin.include_tasks: timeshift.yml

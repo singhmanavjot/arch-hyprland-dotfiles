@@ -1,0 +1,38 @@
+---
+- name: Ensure alhp packages are installed
+  kewlfft.aur.aur:
+    name:
+      - alhp-keyring
+      - alhp-mirrorlist
+    state: present
+  become_user: aur_builder
+
+- name: Ensure pacman config is present
+  ansible.builtin.copy:
+    src: pacman.conf
+    dest: /etc/pacman.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: Update pacman repositories
+
+- name: Ensure pacman repositories are updated if needed
+  ansible.builtin.meta: flush_handlers
+
+- name: Ensure reflector is present
+  community.general.pacman:
+    name: reflector
+    state: present
+
+- name: Ensure reflector config is present
+  ansible.builtin.template:
+    src: reflector.conf.j2
+    dest: /etc/xdg/reflector/reflector.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Ensure reflector timer is enabled
+  ansible.builtin.service:
+    name: reflector.timer
+    enabled: true
