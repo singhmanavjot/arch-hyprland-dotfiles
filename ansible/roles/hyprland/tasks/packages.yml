@@ -52,6 +52,7 @@
       - tela-circle-icon-theme-dracula
       - bibata-cursor-theme
       - libva-nvidia-driver-git
+      - ttf-font-awesome-5
     state: present
   become_user: aur_builder
 
