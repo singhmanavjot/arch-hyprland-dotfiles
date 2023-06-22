@@ -73,7 +73,6 @@ ZSH_USER_PLUGINS=$HOME/.zsh
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
-source $ZSH_USER_PLUGINS/catppuccin_mocha-zsh-syntax-highlighting.zsh
 source $ZSH_ARCH_PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $ZSH_ARCH_PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $ZSH/oh-my-zsh.sh
