@@ -35,7 +35,7 @@
     block: |
       [initial_session]
       command = "Hyprland"
-      user = "manav"
+      user = "{{ user }}"
     marker: "# {mark} ANSIBLE MANAGED BLOCK greetd"
     insertafter: EOF
     state: present
