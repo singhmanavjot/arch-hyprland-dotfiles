@@ -36,6 +36,7 @@
       - xdg-user-dirs
       - kvantum
       - qt5ct
+      - greetd
     state: present
 
 - name: Ensure hyprland packages from aur are present
@@ -92,7 +93,7 @@
   ansible.builtin.service:
     name: "{{ item }}"
     enabled: true
-    state: started
   loop:
     - bluetooth
     - power-profiles-daemon
+    - greetd.service
