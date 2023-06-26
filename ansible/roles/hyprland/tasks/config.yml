@@ -23,19 +23,9 @@
     group: "{{ user }}"
   loop:
     - { src: .zshrc, dest: "{{ home }}/.zshrc", mode: '0644' }
+    - { src: .zprofile, dest: "{{ home }}/.zprofile", mode: '0644' }
     - { src: .config/starship.toml, dest: "{{ home }}/.config/starship.toml", mode: '0644' }
     - { src: .config/kitty, dest: "{{ home }}/.config", mode: '0755' }
     - { src: .config/hypr, dest: "{{ home }}/.config", mode: '0755' }
     - { src: .config/swaylock, dest: "{{ home }}/.config", mode: '0755' }
     - { src: .config/dunst, dest: "{{ home }}/.config", mode: '0755' }
-
-- name: Configure greetd config.
-  ansible.builtin.blockinfile:
-    path: /etc/greetd/config.toml
-    block: |
-      [initial_session]
-      command = "Hyprland"
-      user = "{{ user }}"
-    marker: "# {mark} ANSIBLE MANAGED BLOCK greetd"
-    insertafter: EOF
-    state: present

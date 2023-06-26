@@ -36,7 +36,6 @@
       - xdg-user-dirs
       - kvantum
       - qt5ct
-      - greetd
     state: present
 
 - name: Ensure hyprland packages from aur are present
@@ -97,4 +96,3 @@
   loop:
     - bluetooth
     - power-profiles-daemon
-    - greetd.service
